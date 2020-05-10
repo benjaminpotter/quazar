@@ -2,6 +2,8 @@
 
 public class BuildManager : MonoBehaviour
 {
+    public BuildingHUD buildingHUD;
+
     public GameObject buildingPrefab;
     public GameObject guide;
     GameObject insGuide;
@@ -22,6 +24,7 @@ public class BuildManager : MonoBehaviour
 
         if (isBuilding) { 
             SpawnGuide();
+            buildingHUD.DrawHUD(buildingPrefabs);
         } else
         {
             DestroyGuide();
