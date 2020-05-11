@@ -60,4 +60,7 @@ crashlytics-build.properties
 
 # mac files
 .DS_Store
+
+# unity files
 .collabignore
+world.bin
