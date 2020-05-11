@@ -86,7 +86,7 @@ public class BuildManager : MonoBehaviour
     public void Build(Planet surface)
     {
         if (isBuilding && isValidBuild) { 
-            GameObject insBuilding = Instantiate(buildingPrefabs[0], surface.transform);
+            GameObject insBuilding = Instantiate(buildingPrefab, surface.transform);
 
             insBuilding.transform.position = insGuide.transform.position;
             insBuilding.transform.rotation = insGuide.transform.rotation;

@@ -21,6 +21,7 @@ public class BuildingHUD : MonoBehaviour
             {
                 GameObject inst = Instantiate(buildingHUDElement, page.transform);
                 inst.GetComponent<BuildingHUDElement>().OnSelection(bm, buildingPrefabs[j]);
+                Debug.Log(buildingPrefabs[j]);
             }
 
             pages[i] = page;
@@ -32,6 +33,6 @@ public class BuildingHUD : MonoBehaviour
 
     public void SetHUDState(bool active)
     {
-        pages[activePage].SetActive(true);
+        pages[activePage].SetActive(active);
     }
 }
