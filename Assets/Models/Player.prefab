@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd80030f79ae2423f8c162fa8f24e198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZoom: 0
+  minZoom: 150
 --- !u!114 &-299264067706891964
 MonoBehaviour:
   m_ObjectHideFlags: 0

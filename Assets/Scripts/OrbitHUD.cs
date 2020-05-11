@@ -7,6 +7,10 @@ public class OrbitHUD : MonoBehaviour
 
     public bool isMousedOver;
 
+    // saved to be able to spawn in planet
+    // added by the star system view hud script
+    public PlanetData planetData;
+
     float radius;
     public void SetRadius(float radius) { this.radius = radius; }
 
@@ -92,6 +96,11 @@ public class OrbitHUD : MonoBehaviour
         path.endColor = delColour;
 
         path.widthMultiplier = lineWidth;
+    }
+
+    public void OnMouseDown()
+    {
+
     }
 }
 

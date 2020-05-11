@@ -10,7 +10,6 @@ public class WorldGenerator
 
         Object[] objs = Resources.LoadAll("Planets/RedPlanet");
         PlanetArchetype planetArchetype = (PlanetArchetype) objs[0];
-        Debug.Log(planetArchetype.pName);
 
         return new PlanetData(planetSize, orbitRadius);
     }

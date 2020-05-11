@@ -51,6 +51,9 @@ public class Planet : MonoBehaviour
         return normals.ToArray();
     }
 
+    Vector3 vertex;
+    Vector3 normal;
+
     public GameObject crater;
     void GenerateModel()
     {
@@ -61,16 +64,29 @@ public class Planet : MonoBehaviour
 
         int randomVertex = Random.Range(0, vertices.Length - 1);
 
-        Instantiate(crater, vertices[randomVertex], Quaternion.Euler(normals[randomVertex]), transform);
+        GameObject inst = Instantiate(crater, vertices[randomVertex], Quaternion.identity, transform);
+        inst.transform.rotation = Quaternion.LookRotation(normals[randomVertex]);
+        vertex = vertices[randomVertex];
+        normal = normals[randomVertex];
 
         GetComponent<MeshFilter>().mesh.vertices = vertices;
         GetComponent<MeshFilter>().mesh = baseMesh;
         GetComponent<MeshCollider>().sharedMesh = baseMesh;
     }
 
+    public void GenerateMesh(PlanetData data)
+    {
+        Debug.Log("Generated Mesh");
+    }
+
     // place a building on this planet
     public void Place()
     {
         // save building here
+    }
+
+    void Update()
+    {
+        Debug.DrawRay(vertex, normal);
     }
 }
