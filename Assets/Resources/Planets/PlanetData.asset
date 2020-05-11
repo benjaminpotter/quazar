@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3657ad4f40eb444f1bf3cfdb1a45f220, type: 3}
   m_Name: PlanetData
   m_EditorClassIdentifier: 
-  pName: Red Planet
+  planetName: Planet Name
+  obstacleCountBounds: {x: 0, y: 0}

@@ -9,14 +9,11 @@ public class PlanetData
     public static int minOrbitRadius = 20;
     public static int maxOrbitRadius = 100;
 
-    public int orbitRadius { get; private set; }
-    int size;
+    public int orbitRadius;
+    public int size;
 
     public int GetRadius() { return size; }
 
-    public PlanetData(int size, int orbitRadius)
-    {
-        this.orbitRadius = orbitRadius;
-        this.size = size;
-    }
+    public int obstacleCount;
+
 }

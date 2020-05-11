@@ -5,5 +5,5 @@ public class PlanetArchetype : ScriptableObject
 {
     public string planetName = "Planet Name";
 
-    public Vector2 obstacleCountBounds;
+    public int[] obstacleCountBounds;
 }

@@ -5,13 +5,18 @@ public class WorldGenerator
     // generate new planet shell
     public static PlanetData GeneratePlanet()
     {
-        int planetSize = Random.Range(PlanetData.minPlanetSize, PlanetData.maxPlanetSize);
-        int orbitRadius = Random.Range(PlanetData.minOrbitRadius, PlanetData.maxOrbitRadius);
+        Object[] objs = Resources.LoadAll("Planets");
+        int randomPlanetArchetype = Random.Range(0, objs.Length);
 
-        Object[] objs = Resources.LoadAll("Planets/RedPlanet");
-        PlanetArchetype planetArchetype = (PlanetArchetype) objs[0];
+        PlanetArchetype planetType = objs[randomPlanetArchetype] as PlanetArchetype;
+        PlanetData data = new PlanetData();
 
-        return new PlanetData(planetSize, orbitRadius);
+        data.size = Random.Range(PlanetData.minPlanetSize, PlanetData.maxPlanetSize);
+        data.orbitRadius = Random.Range(PlanetData.minOrbitRadius, PlanetData.maxOrbitRadius);
+
+        data.obstacleCount = Random.Range(planetType.obstacleCountBounds[0], planetType.obstacleCountBounds[1]);
+
+        return data;
     }
 
     // generate new "world"

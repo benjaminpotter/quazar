@@ -13,7 +13,7 @@ public class Planet : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlanetController>();
-        GenerateModel();
+        //GenerateModel();
     }
 
     [Range(0.01f, 0.2f)]
@@ -69,14 +69,29 @@ public class Planet : MonoBehaviour
         vertex = vertices[randomVertex];
         normal = normals[randomVertex];
 
-        GetComponent<MeshFilter>().mesh.vertices = vertices;
-        GetComponent<MeshFilter>().mesh = baseMesh;
-        GetComponent<MeshCollider>().sharedMesh = baseMesh;
+        //GetComponent<MeshFilter>().mesh.vertices = vertices;
+        
     }
 
     public void GenerateMesh(PlanetData data)
     {
-        Debug.Log("Generated Mesh");
+        Mesh baseMesh = IOManager.LoadAsset("Meshes/basePlanet").GetComponent<MeshFilter>().sharedMesh;
+
+        Vector3[] vertices = GetVertices(baseMesh);
+        Vector3[] normals = GetNormals(baseMesh);
+
+        // generate obstacles
+        for (int i = 0; i < data.obstacleCount; i++)
+        {
+            // check if this index is already used
+            int randomVertex = Random.Range(0, vertices.Length - 1);
+
+            GameObject inst = Instantiate(crater, vertices[randomVertex], Quaternion.identity, transform);
+            inst.transform.rotation = Quaternion.LookRotation(normals[randomVertex]);
+        }
+
+        GetComponent<MeshFilter>().mesh = baseMesh;
+        GetComponent<MeshCollider>().sharedMesh = baseMesh;
     }
 
     // place a building on this planet
