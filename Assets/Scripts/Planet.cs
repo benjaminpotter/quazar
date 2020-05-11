@@ -43,11 +43,25 @@ public class Planet : MonoBehaviour
         return vertices.ToArray();
     }
 
+    Vector3[] GetNormals(Mesh mesh)
+    {
+        List<Vector3> normals = new List<Vector3>();
+        mesh.GetNormals(normals);
+
+        return normals.ToArray();
+    }
+
+    public GameObject crater;
     void GenerateModel()
     {
         Mesh baseMesh = IOManager.LoadAsset("Meshes/basePlanet").GetComponent<MeshFilter>().sharedMesh;
 
         Vector3[] vertices = GetVertices(baseMesh);
+        Vector3[] normals = GetNormals(baseMesh);
+
+        int randomVertex = Random.Range(0, vertices.Length - 1);
+
+        Instantiate(crater, vertices[randomVertex], Quaternion.Euler(normals[randomVertex]), transform);
 
         GetComponent<MeshFilter>().mesh.vertices = vertices;
         GetComponent<MeshFilter>().mesh = baseMesh;
