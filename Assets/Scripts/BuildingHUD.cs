@@ -4,18 +4,34 @@ using UnityEngine.UI;
 public class BuildingHUD : MonoBehaviour
 {
     public GameObject buildingHUDElement;
-    Transform page;
+    public GameObject pagePrefab;
 
-    void Start()
+    GameObject[] pages;
+    int activePage;
+
+    // generate the hud object
+    public void CreateHUD(BuildManager bm, GameObject[] buildingPrefabs)
     {
-        page = GetComponentInChildren<HorizontalLayoutGroup>().transform;
+        pages = new GameObject[Mathf.CeilToInt(buildingPrefabs.Length / 10.0f)];
+
+        for (int i = 0; i < pages.Length; i++) { 
+            GameObject page = Instantiate(pagePrefab, transform);
+
+            for (int j = 0; j < buildingPrefabs.Length; j++)
+            {
+                GameObject inst = Instantiate(buildingHUDElement, page.transform);
+                inst.GetComponent<BuildingHUDElement>().OnSelection(bm, buildingPrefabs[j]);
+            }
+
+            pages[i] = page;
+            page.SetActive(false);
+        }
     }
 
-    public void DrawHUD(GameObject[] buildingPrefabs)
+    // REFACTOR
+
+    public void SetHUDState(bool active)
     {
-        for (int i = 0; i < buildingPrefabs.Length; i++)
-        {
-            GameObject inst = Instantiate(buildingHUDElement, page);
-        }
+        pages[activePage].SetActive(true);
     }
 }

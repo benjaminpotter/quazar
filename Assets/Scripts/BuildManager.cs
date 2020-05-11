@@ -16,6 +16,7 @@ public class BuildManager : MonoBehaviour
     void Start()
     {
         buildingPrefabs = LoadBuildingPrefabs();
+        buildingHUD.CreateHUD(this, buildingPrefabs);
     }
 
     public void ToggleBuildMode()
@@ -24,10 +25,11 @@ public class BuildManager : MonoBehaviour
 
         if (isBuilding) { 
             SpawnGuide();
-            buildingHUD.DrawHUD(buildingPrefabs);
+            buildingHUD.SetHUDState(true);
         } else
         {
             DestroyGuide();
+            buildingHUD.SetHUDState(false);
         }
     }
 
@@ -96,7 +98,8 @@ public class BuildManager : MonoBehaviour
     // called from the building hud
     public void SetActiveBuildPrefab(GameObject prefab)
     {
-
+        buildingPrefab = prefab;
+        Debug.Log("Set building prefab");
     }
 
     void Update()
