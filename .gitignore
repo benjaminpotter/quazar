@@ -63,4 +63,6 @@ crashlytics-build.properties
 
 # unity files
 .collabignore
-world.bin
+
+# world files
+*.bin
