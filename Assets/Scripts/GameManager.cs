@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,8 +24,12 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public GameObject planetPrefab;
+    public GameObject planetSystemViewPrefab;
     public StarSystemData starSystem;
+
+    public GameObject planetPrefab;
+    PlanetData currentPlanet;
+    bool canLoadPlanet = true;
 
     GameObject player;
 
@@ -45,6 +50,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void LoadPlanet(PlanetData planet)
+    {
+        if (!canLoadPlanet)
+            return;
+
+        currentPlanet = planet;
+        SceneManager.LoadScene(2);
+    }
+
     void OnLevelWasLoaded(int level)
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -52,6 +66,12 @@ public class GameManager : MonoBehaviour
         if (level == 1)
         {
             DrawStarSystem(IOManager.Load());
+        }
+
+        if (level == 2)
+        {
+            GameObject inst = Instantiate(planetPrefab);
+            inst.GetComponent<Planet>().GenerateMesh(currentPlanet);
         }
     }
 }

@@ -25,6 +25,7 @@ public class StarSystemViewHUD : MonoBehaviour
 
             orbitHUDs[i] = instantiatedHUD.GetComponent<OrbitHUD>();
             orbitHUDs[i].SetRadius(orbitRadius);
+            orbitHUDs[i].planetData = planet;
 
             // generate the planet objects
             GameObject instantiatedPlanetHUD = Instantiate(planetHUDPrefab);
@@ -38,17 +39,17 @@ public class StarSystemViewHUD : MonoBehaviour
         }
     }
 
-    void UpdateHUD(Vector3 point)
+    void UpdateHUD(Vector3 point, bool mouseClick)
     {
         foreach (var orbit in orbitHUDs)
         {
             bool isMousedOver = orbit.CheckPoint(point);
 
-            Debug.Log(isMousedOver);
+            // could break here
 
-            if (isMousedOver)
-            {
-                orbit.OnMouseOver();
+            if (mouseClick) { 
+                orbit.OnMouseDown();
+                GameManager.instance.LoadPlanet(orbit.planetData);
             }
 
             // if the mouse event happened this frame
@@ -62,7 +63,7 @@ public class StarSystemViewHUD : MonoBehaviour
                     orbit.OnMouseOver();
                     // display tool tip?
 
-                    Instantiate(planetToolTip, FindObjectOfType<Canvas>().transform);
+                    //Instantiate(planetToolTip, FindObjectOfType<Canvas>().transform);
                 }
 
                 // if the mouse left the orbit
@@ -87,7 +88,7 @@ public class StarSystemViewHUD : MonoBehaviour
                 return;
             }
 
-            UpdateHUD(hit.point);
+            UpdateHUD(hit.point, Input.GetMouseButtonDown(0));
         }
     }
 }

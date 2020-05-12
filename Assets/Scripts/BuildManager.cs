@@ -122,6 +122,8 @@ public class BuildManager : MonoBehaviour
                 return;
             }
 
+            Debug.Log("Hit Planet");
+
             position = hit.point;
             normal = hit.normal;
 

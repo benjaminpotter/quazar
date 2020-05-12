@@ -22,4 +22,22 @@ public static class IOManager
 
         return data;
     }
+
+    public static UnityEngine.GameObject LoadAsset(string filepath)
+    {
+        return (UnityEngine.GameObject) UnityEngine.Resources.Load(filepath);
+    }
+
+    public static UnityEngine.GameObject[] LoadAssets(string filepath)
+    {
+        UnityEngine.Object[] objects = UnityEngine.Resources.LoadAll(filepath);
+        UnityEngine.GameObject[] gameObjects = new UnityEngine.GameObject[objects.Length];
+
+        for (int i = 0; i < objects.Length; i++)
+        {
+            gameObjects[i] = objects[i] as UnityEngine.GameObject;
+        }
+
+        return gameObjects;
+    }
 }
