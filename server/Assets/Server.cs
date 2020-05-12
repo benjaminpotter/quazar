@@ -27,10 +27,6 @@ public class Server : MonoBehaviour
         byte[] loadedBytes = System.IO.File.ReadAllBytes("world.bin");
 
         NativeArray<byte> buffer = new NativeArray<byte>(loadedBytes, Allocator.Temp);
-        //buffer.CopyFrom(loadedBytes); // causes problems
-        
-
-        Debug.Log(buffer);
 
         var writer = driver.BeginSend(conn);
         writer.WriteBytes(buffer);

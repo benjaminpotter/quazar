@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
 
         else
@@ -44,15 +44,18 @@ public class GameManager : MonoBehaviour
         IOManager.Save(starSystem);
     }
 
-    public void LoadStarSystem()
+    public void SetSystemData(StarSystemData data)
     {
-        // load the star system scene
-        SceneManager.LoadScene(1);
+        starSystem = data;
+        LoadStarSystem();
     }
 
-    public void LoadStarSystem(StarSystemData starSystemData)
+    public void LoadStarSystem()
     {
-        starSystem = starSystemData;
+        if (starSystem.GetPlanets() == null)
+        {
+            starSystem = IOManager.Load();
+        }
 
         // load the star system scene
         SceneManager.LoadScene(1);
@@ -72,13 +75,17 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
+    public void LoadStart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     void OnLevelWasLoaded(int level)
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (level == 1)
         {
-            //DrawStarSystem(IOManager.Load());
             DrawStarSystem(starSystem);
         }
 

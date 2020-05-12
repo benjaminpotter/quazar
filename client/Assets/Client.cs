@@ -73,7 +73,7 @@ public class Client : MonoBehaviour
 
                 Debug.Log("Recieved world file");
 
-                GameManager.instance.LoadStarSystem( IOManager.LoadFromByteStream(buffer.ToArray()) );
+                GameManager.instance.SetSystemData( IOManager.LoadFromByteStream(buffer.ToArray()) );
             }
 
             // if server closes connection
