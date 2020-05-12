@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlanetData
   m_EditorClassIdentifier: 
   planetName: Planet Name
-  obstacleCountBounds: {x: 0, y: 0}
+  obstacleCountBounds: 0400000008000000
